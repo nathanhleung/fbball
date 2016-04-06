@@ -1,5 +1,5 @@
-# FB Ball
-Track stats in facebook messenger basketball
+# FBBall
+Track the stats of basketball games in a thread in Facebook messenger
 
 ## Notes
 - Download the latest version of facebook-chat-api (make sure it has get thread info, if not download straight from github)
