@@ -11,12 +11,13 @@ html
   body
     .container
       h1.text-center NBA Finals Game 6
+      p.text-center Data updates approximately once per hour
       #app
         .text-center(v-if='!loaded')
           br
           br
           h2 Loading...
-          p (it takes about 10 seconds to communicate with FB's server) 
+          //- p (it takes about 10 seconds to communicate with FB's server) 
           h2 {{ timer }}
           .spinner
             .rect1
@@ -51,7 +52,7 @@ html
                 td {{player.score / player.attempts | twoDecimals}}
                 td {{teams[player.team] | capitalize}}
           .text-center
-            button.btn.btn-primary.btn-lg(v-on:click='getData') #[i.fa.fa.fa-refresh]
+            //- button.btn.btn-primary.btn-lg(v-on:click='getData') #[i.fa.fa.fa-refresh]
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.20/vue.min.js')

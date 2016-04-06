@@ -22,7 +22,7 @@ new Vue({
         }
       }, 1000);
       // /data-test.json is a good test data kit
-      $.get('/data', (data) => {
+      $.get('/data.json', (data) => {
         clearInterval(timerInterval);
         const ordered = data.sort((a, b) => {
           // in order of ascending score

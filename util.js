@@ -1,6 +1,7 @@
 "use strict";
 
 const fbChat = require('facebook-chat-api');
+const fs = require('fs');
 
 exports.getScoreHistory = (threadId, cb) => {
     fbChat({
@@ -79,3 +80,22 @@ exports.getPlayerData = (scoreHistory, cb) => {
     return -1;
   }
 };
+
+exports.getDataAndSave = (threadId, cb) => {
+    exports.getScoreHistory(threadId, (err, history) => {
+    if (err) {
+      return cb(err);
+    }
+    exports.getPlayerData(history, (err, playerData) => {
+      if (err) {
+        return cb(err);
+      }
+      fs.writeFile('public/data.json', JSON.stringify(playerData), (err) => {
+        if (err) {
+          return cb(err);
+        }
+        return cb(null);
+      });
+    });
+  });
+}
