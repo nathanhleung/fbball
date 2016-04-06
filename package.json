@@ -7,7 +7,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "prestart": "npm run babel",
+    "babel": "babel public/babel --out-dir public/js"
   },
   "author": "nathanhleung",
   "license": "ISC",

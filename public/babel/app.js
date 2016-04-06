@@ -11,38 +11,36 @@ new Vue({
     teams: ['raptors', 'warriors']
   },
   methods: {
-    getData: function getData() {
-      var _this = this;
-
+    getData() {
       this.loaded = false;
       this.timer = 10;
-      var timerInterval = setInterval(function () {
-        if (_this.timer < 2) {
-          _this.timer -= _this.timer / 2;
+      const timerInterval = setInterval(() => {
+        if (this.timer < 2) {
+          this.timer -= this.timer / 2;
         } else {
-          _this.timer--;
+          this.timer--;
         }
       }, 1000);
       // /data-test.json is a good test data kit
-      $.get('/data', function (data) {
+      $.get('/data', (data) => {
         clearInterval(timerInterval);
-        var ordered = data.sort(function (a, b) {
+        const ordered = data.sort((a, b) => {
           // in order of ascending score
           return b.score - a.score;
         });
-        _this.players = ordered;
-        _this.getTeamScores();
-        _this.loaded = true;
+        this.players = ordered;
+        this.getTeamScores();
+        this.loaded = true;
         // Don't calculate height until after table is rendered
-        setTimeout(function () {
+        setTimeout(() => {
           // So later refreshes don't look bad (scrollbar disappearing)
-          var $body = $('body');
+          const $body = $('body');
           $body.css('min-height', $body.height());
         }, 0);
       });
     },
-    getTeamScore: function getTeamScore(team) {
-      var score = this.players.reduce(function (prev, curr) {
+    getTeamScore(team) {
+      const score = this.players.reduce((prev, curr) => {
         if (curr.team === team) {
           return prev + curr.score;
         } else {
@@ -51,19 +49,19 @@ new Vue({
       }, 0);
       return score;
     },
-    getTeamScores: function getTeamScores() {
+    getTeamScores() {
       this.teamScores = [this.getTeamScore(0), this.getTeamScore(1)];
     }
   },
-  ready: function ready() {
+  ready() {
     this.getData();
   }
-});
+})
 
-Vue.filter('twoDecimals', function (value) {
+Vue.filter('twoDecimals', (value) => {
   return Math.round(value * 100) / 100;
 });
 
-Vue.filter('capitalize', function (value) {
-  return value.substr(0, 1).toUpperCase() + value.substr(1);
+Vue.filter('capitalize', (value) => {
+  return value.substr(0,1).toUpperCase() + value.substr(1);
 });
