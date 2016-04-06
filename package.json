@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "facebook-chat-api": "^1.0.8",
+    "facebook-chat-api": "git+https://git@github.com/Schmavery/facebook-chat-api.git#c0c343e067c162742b865cdd714dec7be8252302",
     "jade": "^1.11.0",
     "morgan": "^1.7.0"
   }

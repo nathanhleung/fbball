@@ -21,6 +21,10 @@ h1 {
   color: #FDB927;
 }
 
+.btn {
+  border-radius: 9999px;
+}
+
 /* courtesy of http://tobiasahlin.com/spinkit/ */
 .spinner {
   margin: 100px auto;

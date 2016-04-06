@@ -13,6 +13,7 @@ new Vue({
   methods: {
     getData() {
       this.loaded = false;
+      this.timer = 10;
       const timerInterval = setInterval(() => {
         if (this.timer < 2) {
           this.timer -= this.timer / 2;
@@ -40,7 +41,7 @@ new Vue({
     },
     getTeamScore(team) {
       const score = this.players.reduce((prev, curr) => {
-        if (curr.fbid % 2 === team) {
+        if (curr.team === team) {
           return prev + curr.score;
         } else {
           return prev;

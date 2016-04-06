@@ -43,6 +43,7 @@ exports.getScoreHistory = (threadId, cb) => {
 };
 
 exports.getPlayerData = (scoreHistory, cb) => {
+  let currentTeam = 0;
   const playerData = scoreHistory.reduce((prev, curr) => {
     if (
       indexOfKeyVal('name', curr.sender_name, prev) === -1
@@ -52,7 +53,13 @@ exports.getPlayerData = (scoreHistory, cb) => {
         fbid: curr.sender_fbid,
         score: curr.score,
         attempts: 1,
+        team: currentTeam,
       });
+      if (currentTeam === 0) {
+        currentTeam = 1;
+      } else {
+        currentTeam = 0;
+      }
     } else {
       let index =
         indexOfKeyVal('name', curr.sender_name, prev);
