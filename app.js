@@ -3,6 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const http = require('http');
 
 const mainCtrl = require('./controllers/main');
 const util = require('./util');
@@ -20,24 +21,20 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 app.get('/', mainCtrl.home);
 // API for refreshing the data
-app.get('/data', (req, res) => {
-  const threadId = 997087047047013;
-  util.getDataAndSave(threadId, (err) => {
-    if (err) {
-      return res.send(err);
-    }
-    res.send('Data saved')
-  });
-})
+app.get('/data', mainCtrl.data);
 
 // Update every hour
 setInterval(() => {
-  const threadId = 997087047047013;
-  util.getDataAndSave(threadId, (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  http.request({
+    host: '127.0.0.1',
+    port: process.env.PORT,
+    path: '/data',
+  }, (response) => {
+    response.on('end', () => {
+      // /data does everything for us
+      console.log('Data updated.');
+    });
+  }).end();
 }, 1000 * 60 * 60);
 
 
