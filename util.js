@@ -94,7 +94,7 @@ exports.getDataAndSave = (threadId, cb) => {
         if (err) {
           return cb(err);
         }
-        return cb(null);
+        return cb(null, playerData);
       });
     });
   });

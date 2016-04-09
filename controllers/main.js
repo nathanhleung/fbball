@@ -8,10 +8,16 @@ exports.home = (req, res) => {
 
 exports.data = (req, res) => {
   const threadId = 997087047047013;
-  util.getDataAndSave(threadId, (err) => {
+  util.getDataAndSave(threadId, (err, playerData) => {
     if (err) {
-      return res.send(err);
+      return res.json({
+        status: 'error',
+        err: JSON.stringify(err),
+      });
     }
-    res.send('Data saved')
+    res.json({
+      status: 'success',
+      playerData,
+    });
   });
 };

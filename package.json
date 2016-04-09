@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node app",
     "prestart": "npm run babel",
-    "babel": "babel public/babel --out-dir public/js"
+    "babel": "babel public/babel --out-dir public/js",
+    "babel:w": "babel public/babel --out-dir public/js -w"
   },
   "author": "nathanhleung",
   "license": "ISC",

@@ -9,10 +9,10 @@ html
     link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
     link(rel='stylesheet' href='css/styles.css')
   body
-    .container
-      h1.text-center NBA Finals Game 6
-      p.text-center Data updates approximately once per hour
-      #app
+    .container#app
+      .text-center
+        h1 NBA Finals Game 6
+        p Data updates approximately once per hour
         .text-center(v-if='!loaded')
           br
           br
@@ -26,6 +26,7 @@ html
             .rect4
             .rect5
         div(v-if='loaded')
+          button.btn.btn-primary.text-center(v-on:click='refresh') Refresh Now
           h2.text-center
             img(src='https://i.imgur.com/JhRFAeO.png' height='60')
             | &nbsp;{{ teamScores[0] }}

@@ -24,6 +24,8 @@ new Vue({
         }
       }, 1000);
       // /data-test.json is a good test data kit
+      // Actually now the server should hit it every hour
+      // But Heroku turns off
       $.get('/data.json', function (data) {
         clearInterval(timerInterval);
         var ordered = data.sort(function (a, b) {
@@ -39,6 +41,33 @@ new Vue({
           var $body = $('body');
           $body.css('min-height', $body.height());
         }, 0);
+      });
+    },
+    refresh: function refresh() {
+      var _this2 = this;
+
+      this.loaded = false;
+      this.timer = 10;
+      var timerInterval = setInterval(function () {
+        if (_this2.timer < 2) {
+          _this2.timer -= _this2.timer / 2;
+        } else {
+          _this2.timer--;
+        }
+      }, 1000);
+      $.get('/data', function (data) {
+        clearInterval(timerInterval);
+        if (data.status === 'success') {
+          var ordered = data.playerData.sort(function (a, b) {
+            return b.score - a.score;
+          });
+          _this2.players = ordered;
+          _this2.getTeamScores();
+          _this2.loaded = true;
+        } else {
+          console.log('There was an error.');
+          console.log(data.err);
+        }
       });
     },
     getTeamScore: function getTeamScore(team) {
