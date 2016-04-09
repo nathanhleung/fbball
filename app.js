@@ -10,7 +10,8 @@ const util = require('./util');
 
 const app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('view engine', 'jade')
 app.set('views', path.join(__dirname, 'views'));
 
@@ -26,8 +27,8 @@ app.get('/data', mainCtrl.data);
 // Update every hour
 setInterval(() => {
   http.request({
-    host: '127.0.0.1',
-    port: process.env.PORT,
+    host: app.get('ip'),
+    port: app.get('port'),
     path: '/data',
   }, (response) => {
     response.on('end', () => {
@@ -38,7 +39,7 @@ setInterval(() => {
 }, 1000 * 60 * 60);
 
 
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), app.get('ip'), () => {
   console.log(`App listening on port ${app.get('port')}`)
 });
 
