@@ -37,6 +37,7 @@ html
           table.table
             thead
               tr
+                th Rank
                 th Name
                 th Field Goals Made
                 th Total Attempts
@@ -47,6 +48,7 @@ html
                 v-for='player in players | orderBy'
                 class="{{teams[player.team]}}"
               )
+                td {{$index + 1}}
                 td {{player.name}}
                 td {{player.score}}
                 td {{player.attempts}}
