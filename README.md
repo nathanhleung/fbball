@@ -1,7 +1,7 @@
 # FBBall
 Track the stats of basketball games in a thread in Facebook messenger
 
-## facebook-chat-api Notes
+## [facebook-chat-api](https://www.npmjs.com/package/facebook-chat-api) Notes
 This requires an edited version of facebook-chat-api (the custom version is already in package.json, here are the details of the change).
 - Download the latest version of facebook-chat-api (make sure it has get thread info, if not download straight from github)
 - Then, in the src/getThreadHistory.js file edit the line (around #54) that says callback(null, resData.payload.actions.map(utils.formatMessage)); and change it to callback(null, resData.payload); to get the raw message
