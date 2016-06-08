@@ -11,6 +11,9 @@ This requires an edited version of facebook-chat-api (the custom version is alre
 ## How It Works
 Uses the facebook-chat-api npm module to grab thread history, then filters out non-basketball messages and determines the score of each player in the thread.
 
+### Security
+Because of the way facebook-chat-api logs into facebook, your account can sometimes be blocked if your server is in a commonly assigned IP range (like Heroku servers). If that occurs, just re-log into facebook and you should be fine.
+
 ## Screenshots
 ### The Web App:
 ![screenshot](http://i.imgur.com/lIa7cF5.png?3)
